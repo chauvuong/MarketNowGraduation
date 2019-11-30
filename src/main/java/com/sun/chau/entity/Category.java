@@ -15,6 +15,7 @@ public class Category {
   @Column(nullable = false)
   private int id;
   private String name;
+  private int parentId;
 
   @OneToMany(mappedBy = "category")
   private List<Product> products;

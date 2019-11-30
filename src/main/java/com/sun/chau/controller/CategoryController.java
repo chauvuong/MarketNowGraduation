@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -25,7 +22,16 @@ public class CategoryController {
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(categoryService.getAll());
     FilterProvider filterProvider = new SimpleFilterProvider()
         .addFilter("filter.category", SimpleBeanPropertyFilter.serializeAllExcept())
-        .addFilter("filter.product", SimpleBeanPropertyFilter.filterOutAllExcept("name"));
+        .addFilter("filter.product", SimpleBeanPropertyFilter.filterOutAllExcept("id","name","price","unit","stock","sku","description","review","rating","shop_id","brand_id"));
+    mappingJacksonValue.setFilters(filterProvider);
+    return new ResponseEntity(mappingJacksonValue, HttpStatus.OK);
+  }
+  @GetMapping({"{id}"})
+  public ResponseEntity getCategoryById(@PathVariable int id){
+    MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(categoryService.getCategoryById(id));
+    FilterProvider filterProvider = new SimpleFilterProvider()
+            .addFilter("filter.category", SimpleBeanPropertyFilter.serializeAllExcept())
+            .addFilter("filter.product", SimpleBeanPropertyFilter.filterOutAllExcept("id","name","price","unit","stock","sku","description","review","rating","shop_id","brand_id"));
     mappingJacksonValue.setFilters(filterProvider);
     return new ResponseEntity(mappingJacksonValue, HttpStatus.OK);
   }

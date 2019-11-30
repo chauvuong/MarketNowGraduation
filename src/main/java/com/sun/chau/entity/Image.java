@@ -1,11 +1,13 @@
 package com.sun.chau.entity;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import lombok.Getter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@JsonFilter("filter.image")
 public class Image {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

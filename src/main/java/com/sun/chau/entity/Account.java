@@ -1,5 +1,6 @@
 package com.sun.chau.entity;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@JsonFilter("filter.account")
 public class Account {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

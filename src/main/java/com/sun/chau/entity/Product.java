@@ -21,6 +21,7 @@ public class Product {
   private int stock;
   private String sku;
   private int rating;
+  private BigDecimal realPrice;
 
   @Column(columnDefinition = "TEXT")
   private String description;
