@@ -21,8 +21,8 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Optional<Image> getImageById(int id) {
-        return imageRepository.findById(id);
+    public Image getImageById(int id) {
+        return imageRepository.findOne(id);
     }
 
     @Override
@@ -32,12 +32,12 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public List<Image> addImages(List<Image> images) {
-        return (List<Image>) imageRepository.saveAll(images);
+        return (List<Image>) imageRepository.save(images);
     }
 
     @Override
     public Boolean deleteImage(int id) {
-        imageRepository.deleteById(id);
+        imageRepository.delete(id);
         return true;
     }
 

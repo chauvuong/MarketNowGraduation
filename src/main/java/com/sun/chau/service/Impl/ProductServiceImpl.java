@@ -13,21 +13,24 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
   @Autowired
   private ProductRepository productRepository;
+
   @Override
   public List<Product> getAll() {
-    return (List<Product>) productRepository.findAll(Sort.by(Sort.Direction.DESC, "rating"));
+    return (List<Product>) productRepository.findAll(new Sort(Sort.Direction.DESC, "rating"));
   }
+
   public Product getDeal() {
-    return productRepository.findAll(Sort.by(Sort.Direction.DESC, "realPrice","rating")).get(0);
+    return productRepository.findAll(new Sort(Sort.Direction.DESC, "realPrice", "rating")).get(0);
   }
+
   @Override
   public List<Product> findAllByCategoryId(int categoryId) {
-    if(categoryId==1) return (List<Product>) productRepository.findAll(Sort.by(Sort.Direction.DESC, "rating"));
+    if (categoryId == 1) return (List<Product>) productRepository.findAll(new Sort(Sort.Direction.DESC, "rating"));
     return productRepository.findAllByCategoryId(categoryId);
   }
 
   @Override
   public Product getProductById(int id) {
-    return (Product) productRepository.findAll().get(id);
+    return productRepository.findOne(id);
   }
 }

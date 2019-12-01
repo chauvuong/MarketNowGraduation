@@ -14,6 +14,7 @@ public class Image {
   @Column(nullable = false)
   private int id;
   private String name;
+  private String path;
 
   @ManyToOne
   @JoinColumn(name = "product_id")

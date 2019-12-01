@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -19,17 +18,11 @@ public class OrderProduct {
 
   private Date date;
   private Status status;
-
-  @ManyToOne
-  @JoinColumn(name = "account_id")
-  private Account account;
+  private int shipperId;
+  private int userId;
 
   @OneToMany(mappedBy = "orderProduct")
   private List<Item> items;
-
-  @ManyToOne
-  @JoinColumn(name = "shipper_id")
-  private Shipper shipper;
 
   @ManyToOne
   @JoinColumn(name = "discount_id")
